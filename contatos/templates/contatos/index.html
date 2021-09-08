@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+
+	<h1>Agenda</h1>
+
+	{% for contato in contatos %}
+
+		<div class="card">
+			<div class="line">
+				<h3>Nome: </h3> <a href="{% url 'ver_contato' contato.id %}">{{contato.nome}}</a>
+			</div>
+			{% if contato.sobrenome %}
+				<div class="line">
+					<h3>Sobrenome: </h3> <p>{{contato.sobrenome}}</p>
+				</div>
+			{% endif %}
+			<div class="line">
+				<h3>Telefone: </h3> <p>{{contato.telefone}}</p>
+			</div>
+			<div class="line">
+				<h3>Categoria: </h3> <p>{{contato.categoria}}</p>
+			</div>
+		</div>
+	
+	{% endfor %}
+
+	<div class="pag">
+		{% for pagina in contatos.paginator.page_range %}
+			{% if contatos.number == pagina %}
+				<a class="button active" href="?page={{ pagina }}&termo={{ request.GET.termo }}">{{ pagina }}</a>
+			{% else %}
+				<a class="button" href="?page={{ pagina }}&termo={{ request.GET.termo }}">{{ pagina }}</a>
+			{% endif %}
+		{% endfor %}
+	</div>
+
+</section>
+{% endblock %}

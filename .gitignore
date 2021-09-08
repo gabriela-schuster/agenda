@@ -1,0 +1,6 @@
+bin/
+lib/
+pyvenv.cfg
+media/
+contatos/__pychache__/
+agenda/__pychache__/

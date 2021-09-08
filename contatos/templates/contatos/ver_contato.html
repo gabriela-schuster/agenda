@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+
+	{% if contato.foto %}
+		<img src="{{ contato.foto.url }}" style="max-width: 250px;">
+	{% endif %}
+	
+	<div class="line">
+		<h2>{{contato.nome}}</h3>
+	
+		{% if contato.sobrenome %}
+		<h2>{{contato.sobrenome}}</h2>
+		{% endif %}		
+	</div>
+	<p>Criado em {{contato.data_criacao|date:'d/m/Y'}}</p>
+
+	<div class="card">
+		<div class="line"><h3>Telefone: </h3> <p>{{contato.telefone}}</p></div>
+
+		{% if contato.email %}
+		<div class="line"><h3>Email: </h3> <p>{{contato.email}}</p></div>
+		{% endif %}
+
+		<div class="line"><h3>Categoria: </h3> <p>{{contato.categoria}}</p></div>
+
+		{% if contato.descricao %}
+		<div class="line"><h3>Descrição: </h3> <p>{{contato.descricao}}</p></div>
+		{% endif %}
+	</div>
+
+</section>
+{% endblock %}

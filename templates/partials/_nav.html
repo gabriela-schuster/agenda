@@ -1,0 +1,19 @@
+<header>
+	<div class="header-text">
+		<form action="{% url 'busca' %}" method="get">
+			<input type="search" class="input"
+			placeholder="pesquisar contato"
+			name="termo"
+			value="{{ request.GET.termo }}">
+		</form>
+	</div>
+</header>
+
+<nav>
+	<a href="{% url 'index' %}"><h3>Agenda</h1></a>
+	<div>
+			<a href="#">Link</a>
+			<a href="#">Link</a>
+			<a href="#">Link</a>
+		</div>
+</nav>
