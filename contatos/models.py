@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 class Categoria(models.Model):
 	nome = models.CharField(max_length=255)
@@ -9,6 +10,7 @@ class Categoria(models.Model):
 
 
 class Contato(models.Model):
+	owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 	nome = models.CharField(max_length=225)
 	sobrenome = models.CharField(max_length=225, blank=True)
 	telefone = models.CharField(max_length=225)

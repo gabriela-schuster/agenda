@@ -7,16 +7,18 @@ from django.contrib import messages
 from django.db.models.functions import Concat
 
 def index(req):
-	contatos = Contato.objects.all().order_by('-id').filter(mostrar = True)
-	paginator = Paginator(contatos, 5)
-	page_number = req.GET.get('page')
-	contatos = paginator.get_page(page_number)
-
-	context = {
-		'contatos': contatos
-	}
-	return render(req, 'contatos/index.html', context)
-
+	user = req.user
+	if str(user) != 'AnonymousUser':
+		contatos = Contato.objects.all().order_by('-id').filter(mostrar = True, owner = user)
+		paginator = Paginator(contatos, 5)
+		page_number = req.GET.get('page')
+		contatos = paginator.get_page(page_number)
+		context = {
+			'contatos': contatos
+		}
+		return render(req, 'contatos/index.html', context)
+	else:
+		return render(req, 'contatos/index.html')
 
 def ver_contato(req, contato_id):
 	# contato = Contato.objects.get(id=contato_id)

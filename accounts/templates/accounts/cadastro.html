@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+
+	<h1>Cadastro</h1>
+
+	<form action="{% url 'cadastro' %}" method="POST">
+		{% csrf_token %}
+
+		<label for="nome">Nome</label>
+		<input class="input" type="text" name="nome" id="nome" value="{{request.POST.nome}}">
+		<label for="sobrenome">Sobrenome</label>
+		<input class="input" type="text" name="sobrenome" id="sobrenome" value="{{request.POST.sobrenome}}">
+		<label for="usuario">Usuário</label>
+		<input class="input" type="text" name="usuario" id="usuario" value="{{request.POST.usuario}}">
+		<label for="email">Email</label>
+		<input class="input" type="email" name="email" id="email" value="{{request.POST.email}}">
+		<label for="senha">Senha</label>
+		<input class="input" type="password" name="senha" id="senha">
+		<label for="senha2">Repetir senha</label>
+		<input class="input" type="password" name="senha2" id="senha2">
+		<input class="button" type="submit" value="Cadastrar">
+	</form>
+
+</section>
+{% endblock %}

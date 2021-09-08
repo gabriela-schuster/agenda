@@ -3,7 +3,11 @@
 {% block content %}
 <section>
 
-	<h1>Agenda</h1>
+	{% if request.user.is_authenticated %}
+		<h1>Agenda de {{user.username}}</h1>
+	{% else %}
+		<h1>Logue para ver seus contatos</h1>
+	{% endif %}
 
 	{% for contato in contatos %}
 

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+
+	<h1>Login</h1>
+
+	<form action="{% url 'login' %}" method="POST">
+		{% csrf_token %}
+
+		<label for="usuario">Usuário</label>
+		<input class="input" type="text" name="usuario" id="usuario" value="{{request.POST.usuario}}">
+		<label for="senha">Senha</label>
+		<input class="input" type="password" name="senha" id="senha">
+		<input class="button" type="submit" value="Login">
+	</form>
+
+</section>
+{% endblock %}
