@@ -1,3 +1,4 @@
+from accounts.forms import ContatoForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
 from .models import Contato
@@ -52,3 +53,24 @@ def busca(req):
 
 	context = {'contatos': contatos}
 	return render(req, 'contatos/busca.html', context)
+
+
+def edit(req, contato_id):
+	contato = Contato.objects.get(id=contato_id)
+	form = ContatoForm(instance=contato)
+
+	context = {
+		'contato': contato,
+		'form': form
+	}
+	if req.method != 'POST':
+		return render(req, 'contatos/edit.html', context)
+	form = ContatoForm(req.POST, instance=contato)
+
+	if not form.is_valid:
+		messages.error(req, 'formulário inválido')
+		return render(req, 'contatos/edit.html')
+
+	form.save()
+	messages.success(req, f'contato de {req.POST.get("nome")} atualizado com sucesso')
+	return render(req, 'contatos/edit.html', context)

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %} | editando {{ contato.nome }} {{ contato.sobrenome }}{% endblock %}
+
+{% block content %}
+<section>
+
+	<h2>Editar {{ contato.nome }} {{ contato.sobrenome }}</h2>
+
+
+	<div class="card">
+		<form action="" method="POST">
+			{% csrf_token %}
+
+			{{form}}
+
+			<input type="submit" value="Concluir" class="button">
+		</form>
+	</div>
+
+</section>
+{% endblock %}

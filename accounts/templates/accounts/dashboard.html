@@ -1,9 +1,21 @@
 {% extends 'base.html' %}
 
+{% block title %}| dashboard{% endblock %}
+
 {% block content %}
 <section>
 
-	<h1>Dashboard: {{user.username}}</h1>
+	<h1>Dashboard</h1>
+
+	<div class="card">
+		<form action="{% url 'dashboard' %}" method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+
+			{{ form }}
+
+			<input type="submit" value="Enviar" class="button">
+		</form>
+	</div>
 
 </section>
 {% endblock %}

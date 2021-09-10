@@ -3,6 +3,7 @@ from django.contrib import messages, auth
 from django.core.validators import validate_email
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from .forms import ContatoForm
 
 
 def logout(req):
@@ -59,8 +60,22 @@ def cadastro(req):
 
 @login_required(redirect_field_name='login')
 def dashboard(req):
-	return render(req, 'accounts/dashboard.html')
+	if req.method != 'POST':
+		form = ContatoForm()
+		return render(req, 'accounts/dashboard.html', { 'form': form })
 
+	form = ContatoForm(req.POST, req.FILES)
+	if not form.is_valid:
+		messages.error(req, 'Formulário não é válido')
+		form = ContatoForm(req.POST)
+		return render(req, 'accounts/dashboard.html', { 'form': form })
+
+	user = req.user
+	contato = form.save(commit=False)
+	contato.owner = user
+	contato.save()
+	messages.success(req, f'Contato de {req.POST.get("nome")} criado com sucesso')
+	return redirect('dashboard')
 
 #? ---------------- not views: 
 

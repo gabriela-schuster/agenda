@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block title %}| {{contato.nome}} {{contato.sobrenome}} {% endblock %}
+
 {% block content %}
 <section>
 
@@ -15,6 +17,8 @@
 		{% endif %}		
 	</div>
 	<p>Criado em {{contato.data_criacao|date:'d/m/Y'}}</p>
+	<!-- TODO: -->
+	<p><a href="{% url 'edit' contato.id %}">Editar</a> ou <a href="#">Excluir</a></p>
 
 	<div class="card">
 		<div class="line"><h3>Telefone: </h3> <p>{{contato.telefone}}</p></div>

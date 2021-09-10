@@ -1,19 +1,27 @@
 {% extends 'base.html' %}
 
+{% block title %} | login{% endblock %}
+
 {% block content %}
 <section>
 
 	<h1>Login</h1>
 
-	<form action="{% url 'login' %}" method="POST">
-		{% csrf_token %}
+	{% if user.is_authenticated %}
+		<div class="line">
+			<p>Você está autenticado como {{ user.username }}, <a href="{% url 'index' %}">clique para voltar</a> ou <a href="{% url 'logout' %}">clique para deslogar</a>.</p>			
+		</div>
+	{% else %}
+		<form action="{% url 'login' %}" method="POST">
+			{% csrf_token %}
 
-		<label for="usuario">Usuário</label>
-		<input class="input" type="text" name="usuario" id="usuario" value="{{request.POST.usuario}}">
-		<label for="senha">Senha</label>
-		<input class="input" type="password" name="senha" id="senha">
-		<input class="button" type="submit" value="Login">
-	</form>
+			<label for="usuario">Usuário</label>
+			<input class="input" type="text" name="usuario" id="usuario" value="{{request.POST.usuario}}">
+			<label for="senha">Senha</label>
+			<input class="input" type="password" name="senha" id="senha">
+			<input class="button" type="submit" value="Login">
+		</form>
+	{% endif %}
 
 </section>
 {% endblock %}

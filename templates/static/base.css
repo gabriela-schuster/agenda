@@ -47,6 +47,11 @@ a {
     text-decoration: none;
     color: inherit;
 }
+p a {
+	color: var(--bold);
+	text-decoration: underline;
+
+}
 ::selection {
     background-color: var(--bold);
     color: var(--body);
@@ -63,7 +68,7 @@ section {
 /* ********
 *   forms
 */
-form {
+form:not(.card form) {
 	margin-top: 2rem; /* +1rem label = 3rem */
 }
 .input {
