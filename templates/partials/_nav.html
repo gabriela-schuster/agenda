@@ -1,5 +1,4 @@
 <header>
-	<div class="header-text">
 		{% if request.user.is_authenticated %}
 			<form action="{% url 'busca' %}" method="get">
 				<input type="search" class="input"
@@ -10,7 +9,6 @@
 		{% else %}
 			<h3>Faça login para ver seus contatos</h3>
 		{% endif %}
-	</div>
 </header>
 
 <nav>

@@ -74,3 +74,14 @@ def edit(req, contato_id):
 	form.save()
 	messages.success(req, f'contato de {req.POST.get("nome")} atualizado com sucesso')
 	return render(req, 'contatos/edit.html', context)
+
+
+def delete(req, contato_id):
+	contato = Contato.objects.get(id=contato_id)
+
+	if req.method != 'POST':
+		return render(req, 'contatos/delete.html', {'contato': contato})
+
+	contato.delete()
+	messages.warning(req, f'contato {contato.nome} deletado com sucesso')
+	return redirect('index')

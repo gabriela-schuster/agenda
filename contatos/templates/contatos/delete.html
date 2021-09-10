@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}| deletar {{contato.nome}} {{contato.spobrenome}} {% endblock %}
+
+{% block content %}
+<section>
+
+	<div class="line">
+		<a href="{% url 'index' %}">Voltar para a tela inicial</a>
+	</div>
+	<h2>Deletar {{contato.nome}} {{contato.sobrenome}} ?</h2>
+	<p>Criado em: {{contato.data_criacao}}</p>
+	<p>Telefone: {{contato.telefone}}</p>
+
+	<form method="POST">
+		{% csrf_token %}
+		<input type="submit" value="Excluir" class="button">
+	</form>
+
+</section>
+{% endblock %}
